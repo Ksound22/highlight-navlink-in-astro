@@ -1,16 +1,19 @@
 ---
-import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+const pathname = Astro.url.pathname;
+console.log(pathname)
 ---
 
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
+		<ul class="internal-links">
+			<li><a href="/" class={pathname === "/" ? "active" : ""}>Home</a></li>
+			<li><a href="/blog" class={pathname === "/blog" ? "active" : ""}>Blog</a></li>
+			<li><a href="/about" class={pathname === "/about" ? "active" : ""}>About</a></li>
+			<li><a href="/services" class={pathname === "/services" ? "active" : ""}>Services</a></li>
+			<li><a href="/contact" class={pathname === "/contact" ? "active" : ""}>Contact</a></li>
+		</ul>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
@@ -63,6 +66,13 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 	}
+
+	nav ul {
+		display: flex;
+		list-style-type: none;
+		gap: 1rem;
+	}
+
 	nav a {
 		padding: 1em 0.5em;
 		color: var(--black);
